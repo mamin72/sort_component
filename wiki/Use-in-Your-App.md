@@ -28,3 +28,6 @@ export function sortPersonNames(items: readonly PersonName[]): PersonName[] {
 - Keep your rule definitions close to your domain model.
 - Prefer one adapter per domain object to avoid duplicated sorting logic.
 - Add tests around edge cases such as null values and tie-breakers.
+- Parse text/stream/JSON/XML into typed arrays before calling the sorter.
+
+For source format specifics, see [Data Formats](Data-Formats).
