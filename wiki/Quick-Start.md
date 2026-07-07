@@ -25,14 +25,24 @@ const rules: SortRule<Person>[] = [
 const sorted = sortByRules(data, rules);
 ```
 
-## Supported Input Format
+## Supported Input Formats
 
-The sorter works on in-memory arrays.
+The library supports:
 
-- Direct input: typed array data (`T[]`)
-- Parse-first input: raw text, streams, JSON text, XML text
+- direct typed arrays (`sortByRules`)
+- JSON, JSONL, CSV, TSV, XML, YAML (`parseAndSort`)
+- text streams (`parseAndSortFromStream`)
 
-See [Data Formats](Data-Formats) for parser mapping guidance.
+```ts
+import { parseAndSort } from "sort_component";
+
+const sorted = parseAndSort("name,score\\nA,1\\nB,3", {
+  format: "csv",
+  rules: [{ id: "score", direction: "desc", selector: (x) => Number(x.score) }]
+});
+```
+
+See [Data Formats](Data-Formats) for full details.
 
 ## Quality Commands (for contributors)
 
