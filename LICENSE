@@ -1,0 +1,33 @@
+Dual License Notice for sort_component
+
+Copyright (c) 2026 Manish Amin
+
+IMPORTANT: This project is offered under a dual-license model:
+
+1. Non-Commercial License (default)
+	 You may use, copy, modify, and distribute this software for personal,
+	 educational, research, and other non-commercial purposes only.
+
+2. Commercial License (required for commercial use)
+	 Any commercial use requires a separate paid commercial license agreement
+	 with the copyright holder.
+
+Commercial use includes, but is not limited to:
+- Selling software or services that include this component
+- Using this component in a paid product, subscription, SaaS, or enterprise
+	internal business system
+- Any use where the primary purpose is commercial advantage or monetary
+	compensation
+
+WITHOUT A COMMERCIAL LICENSE, COMMERCIAL USE IS NOT PERMITTED.
+
+See COMMERCIAL_LICENSE.md for commercial licensing terms and contact details.
+
+Warranty Disclaimer
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
