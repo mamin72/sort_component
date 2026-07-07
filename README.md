@@ -2,6 +2,25 @@
 
 Reusable TypeScript sorting component library.
 
+## Data Format Contract
+
+`sort_component` sorts in-memory arrays using sort rules.
+
+- Supported direct input: array of typed items (for example `Person[]`).
+- Not accepted directly: raw text strings, text streams, JSON text, XML text.
+
+If your source is text, stream, JSON, or XML, parse it first into a typed array,
+then call `sortByRules`.
+
+### Typical Source-to-Array Mapping
+
+- Text string: split/parse lines into typed objects.
+- Text stream: read stream chunks, parse records, build typed objects.
+- JSON: parse to objects and validate required fields.
+- XML: parse to objects and map to your typed domain model.
+
+For end-to-end examples, see the wiki pages: `Use in Your App` and `API Reference`.
+
 ## Licensing
 
 This project uses a dual-license model:

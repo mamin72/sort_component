@@ -12,6 +12,14 @@ The package is authored in TypeScript and publishes compiled output.
 
 No. The API returns a new sorted array.
 
+## What data format does it accept?
+
+Directly: typed arrays (`T[]`).
+
+Not directly: raw text, streams, JSON text, XML text.
+
+Parse these source formats into typed arrays first, then sort.
+
 ## Where should I wire this in my app?
 
 Use your app's common components layer as an adapter boundary.

@@ -25,6 +25,15 @@ const rules: SortRule<Person>[] = [
 const sorted = sortByRules(data, rules);
 ```
 
+## Supported Input Format
+
+The sorter works on in-memory arrays.
+
+- Direct input: typed array data (`T[]`)
+- Parse-first input: raw text, streams, JSON text, XML text
+
+See [Data Formats](Data-Formats) for parser mapping guidance.
+
 ## Quality Commands (for contributors)
 
 ```bash
