@@ -10,6 +10,56 @@ permissions:
   contents: read
 
 jobs:
+  pr-governance-check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+
+    steps:
+      - name: Validate PR governance sections
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.pull_request?.body ?? "";
+
+            const requiredSections = [
+              "## Summary",
+              "## What Changed",
+              "## Key Files",
+              "## Validation",
+              "## Notes",
+              "## Reuse Checklist",
+            ];
+
+            const missingSections = requiredSections.filter((section) => !body.includes(section));
+
+            const requiredChecks = [
+              /- \[x\] I searched existing modules before adding new code\./i,
+              /- \[x\] I reused existing utilities\/components where possible\./i,
+              /- \[x\] I only introduced new code where no reusable path existed\./i,
+            ];
+
+            const missingChecks = requiredChecks
+              .map((pattern, index) => ({ pattern, index }))
+              .filter(({ pattern }) => !pattern.test(body))
+              .map(({ index }) => index + 1);
+
+            if (missingSections.length === 0 && missingChecks.length === 0) {
+              core.info("PR governance validation passed.");
+              return;
+            }
+
+            const messages = [];
+            if (missingSections.length > 0) {
+              messages.push(`Missing required PR sections: ${missingSections.join(", ")}`);
+            }
+            if (missingChecks.length > 0) {
+              messages.push(`Reuse checklist items not checked: ${missingChecks.join(", ")}`);
+            }
+
+            core.setFailed(messages.join("\n"));
+
   quality-check:
     runs-on: ubuntu-latest
 
