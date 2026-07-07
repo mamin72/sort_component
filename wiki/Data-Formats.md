@@ -2,50 +2,60 @@
 
 ## Core Contract
 
-`sort_component` accepts in-memory arrays and sorts them by rule selectors.
+`sort_component` supports both:
+
+- direct array sorting with `sortByRules`
+- format-aware parsing + sorting with `parseAndSort` and `parseAndSortFromStream`
+
+## Built-in Formats
+
+- JSON
+- JSONL / NDJSON
+- CSV
+- TSV
+- XML
+- YAML
+
+## API Options
+
+### 1. Direct array sorting
 
 ```ts
 sortByRules<T>(items: readonly T[], rules: readonly SortRule<T>[]): T[]
 ```
 
-This means the direct input type is `readonly T[]`.
+### 2. Parse and sort (text/object input)
 
-## What You Can Pass Directly
+```ts
+parseAndSort<T>(input: unknown, options: ParseAndSortOptions<T>): T[]
+```
 
-- Arrays of objects
-- Arrays of strings, numbers, booleans, or dates (with matching selectors)
+### 3. Parse and sort from stream
 
-## What You Should Parse First
+```ts
+parseAndSortFromStream<T>(stream: Readable, options: ParseAndSortOptions<T>): Promise<T[]>
+```
 
-- Plain text strings
-- Text streams
-- JSON text payloads
-- XML payloads
+## Mapping to Domain Models
 
-## Recommended Mapping by Source
+If parsed rows do not match your app model exactly, pass `mapper`:
 
-- Text string:
-  - split into records (for example lines)
-  - parse fields
-  - map to typed objects
-- Text stream:
-  - consume stream chunks
-  - frame records (line or delimiter based)
-  - map to typed objects
-- JSON:
-  - parse JSON
-  - validate required fields
-  - map to typed objects
-- XML:
-  - parse XML to JS objects
-  - normalize structure
-  - map to typed objects
+```ts
+parseAndSort(csvText, {
+  format: "csv",
+  mapper: (row) => ({
+    id: String(row.id),
+    score: Number(row.score),
+  }),
+  rules,
+});
+```
 
 ## Practical Rule
 
-Parsing and validation are your adapter responsibility.
-Sorting is the library responsibility.
+Use `sortByRules` for already-typed arrays.
+Use `parseAndSort` for external payload formats.
 
 ## Integration Pattern
 
-Keep parser + mapper in your app common components layer, then call `sortByRules` with typed arrays.
+Keep rules in your app common components layer, and call format-aware APIs directly for file or stream payloads.

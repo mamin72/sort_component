@@ -4,22 +4,42 @@ Reusable TypeScript sorting component library.
 
 ## Data Format Contract
 
-`sort_component` sorts in-memory arrays using sort rules.
+`sort_component` now supports modern input formats directly through built-in codecs.
 
-- Supported direct input: array of typed items (for example `Person[]`).
-- Not accepted directly: raw text strings, text streams, JSON text, XML text.
+Supported formats:
 
-If your source is text, stream, JSON, or XML, parse it first into a typed array,
-then call `sortByRules`.
+- JSON
+- JSONL / NDJSON
+- CSV
+- TSV
+- XML
+- YAML
 
-### Typical Source-to-Array Mapping
+You can still sort typed arrays directly with `sortByRules`, or use parse-and-sort APIs when the input is not already an array.
 
-- Text string: split/parse lines into typed objects.
-- Text stream: read stream chunks, parse records, build typed objects.
-- JSON: parse to objects and validate required fields.
-- XML: parse to objects and map to your typed domain model.
+```ts
+import { parseAndSort, sortByRules } from "sort_component";
 
-For end-to-end examples, see the wiki pages: `Use in Your App` and `API Reference`.
+// Direct array sorting
+const sortedArray = sortByRules(items, rules);
+
+// Format-aware parsing + sorting
+const sortedFromCsv = parseAndSort(csvText, {
+	format: "csv",
+	rules,
+});
+```
+
+For stream inputs:
+
+```ts
+import { parseAndSortFromStream } from "sort_component";
+
+const sorted = await parseAndSortFromStream(stream, {
+	format: "jsonl",
+	rules,
+});
+```
 
 ## Licensing
 
