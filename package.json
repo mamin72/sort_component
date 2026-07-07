@@ -26,6 +26,14 @@
   ],
   "author": "Manish Amin",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mamin72/sort_component.git"
+  },
+  "homepage": "https://github.com/mamin72/sort_component#readme",
+  "bugs": {
+    "url": "https://github.com/mamin72/sort_component/issues"
+  },
   "publishConfig": {
     "access": "public"
   },

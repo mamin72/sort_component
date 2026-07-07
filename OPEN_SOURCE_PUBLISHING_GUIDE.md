@@ -48,11 +48,11 @@ Suggested package.json additions:
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-org/sort_component.git"
+    "url": "git+https://github.com/mamin72/sort_component.git"
   },
-  "homepage": "https://github.com/your-org/sort_component#readme",
+  "homepage": "https://github.com/mamin72/sort_component#readme",
   "bugs": {
-    "url": "https://github.com/your-org/sort_component/issues"
+    "url": "https://github.com/mamin72/sort_component/issues"
   },
   "keywords": [
     "sorting",
