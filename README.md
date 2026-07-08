@@ -19,6 +19,7 @@ Reusable TypeScript sorting component library.
 - Validation helpers for column configs, row keys, delimiter checks, and supported format errors
 - Starter templates for table and parse+sort setup (`createTableStarterTemplate`, `createParseAndSortStarterTemplate`, `parseAndSortWithStarterTemplate`)
 - Saved views model for table state round-trip (`createSavedView`, `applySavedView`, `saveView`, `loadView`, `listSavedViews`)
+- Server-side mode adapters for API-ready request models (`toServerSortRules`, `toServerFilterRules`, `toServerPaginationRequest`, `createServerTableRequest`)
 - Action column support: `view`, `edit`, `archive`, `delete` with router hooks and confirmation support
 - Facade API: `myComponent` with aliases (`SortData`, `Sort`, `SortableTable`, `Table`, `myComponet`)
 
@@ -245,6 +246,25 @@ table.setSortRules([{ columnKey: "name", direction: "asc" }]);
 table.saveView("Active Users");
 table.loadView("Default");
 table.applySavedView(initial);
+```
+
+Server-side mode adapters:
+
+- `toServerSortRules(sortRules)`
+- `toServerFilterRules(filters)`
+- `toServerPaginationRequest(pagination)`
+- `createServerTableRequest({ sortRules, filters, pagination })`
+
+Server request example:
+
+```ts
+const request = createServerTableRequest({
+	sortRules: table.getSortRules(),
+	filters: table.getFilters(),
+	pagination: table.getPagination()
+});
+
+// request => { sort: [...], filters: [...], pagination: { pageIndex, pageSize, offset, limit } }
 ```
 
 Formatter preset helpers:

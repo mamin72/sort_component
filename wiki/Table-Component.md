@@ -229,6 +229,27 @@ APIs:
 - `deleteSavedView(name)`
 - `clearSavedViews()`
 
+## Server-Side Mode Adapters
+
+Use adapters to convert client-side table state into deterministic API-ready request models.
+
+```ts
+import { createServerTableRequest } from "sort_component";
+
+const request = createServerTableRequest({
+  sortRules: table.getSortRules(),
+  filters: table.getFilters(),
+  pagination: table.getPagination()
+});
+```
+
+Adapter APIs:
+
+- `toServerSortRules(sortRules)`
+- `toServerFilterRules(filters)`
+- `toServerPaginationRequest(pagination)`
+- `createServerTableRequest({ sortRules, filters, pagination })`
+
 ## Formatter Presets
 
 The package also exports reusable formatter preset helpers for common regional defaults.
