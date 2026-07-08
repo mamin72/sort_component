@@ -106,7 +106,6 @@ export interface TablePaginationState {
 
 export type TableColumnVisibilityState = Readonly<Record<string, boolean>>;
 export type TableRowKey = string | number;
-<<<<<<< HEAD
 export type TableCsvExportScope = 'all' | 'filtered' | 'sorted' | 'paginated' | 'selected';
 
 export interface TableCsvExportOptions {
@@ -115,8 +114,6 @@ export interface TableCsvExportOptions {
   readonly includeHeaders?: boolean;
   readonly includeHiddenColumns?: boolean;
 }
-=======
->>>>>>> origin/main
 
 export interface TableSelectionInfo {
   readonly selectedCount: number;
@@ -410,7 +407,6 @@ export class JsonTableComponent<T extends Record<string, unknown>> {
     return Promise.resolve(handler(context));
   }
 
-<<<<<<< HEAD
   public exportCsv(options: TableCsvExportOptions = {}): string {
     const scope = options.scope ?? 'all';
     const delimiter = options.delimiter ?? ',';
@@ -435,8 +431,7 @@ export class JsonTableComponent<T extends Record<string, unknown>> {
     return lines.join('\r\n');
   }
 
-=======
->>>>>>> origin/main
+
   public getColumnVisibility(): TableColumnVisibilityState {
     return this.columnVisibilityState;
   }
@@ -775,16 +770,7 @@ export class JsonTableComponent<T extends Record<string, unknown>> {
     }
 
     return (row: T) => {
-<<<<<<< HEAD
       return assertValidRowKeyValue(rowKey, row[rowKey]);
-=======
-      const value = row[rowKey];
-      if (typeof value === 'string' || typeof value === 'number') {
-        return value;
-      }
-
-      throw new Error(`Invalid row key value for '${rowKey}'. Row key must resolve to string or number.`);
->>>>>>> origin/main
     };
   }
 
@@ -792,11 +778,7 @@ export class JsonTableComponent<T extends Record<string, unknown>> {
     this.rows.forEach((row, index) => {
       const token = this.getRowToken(row, index);
       if (this.rowKeyTokenToRow.has(token)) {
-<<<<<<< HEAD
         throw new Error(`Duplicate row key '${token}' detected at row index ${index}. Row keys must be unique.`);
-=======
-        throw new Error(`Duplicate row key '${token}' detected. Row keys must be unique.`);
->>>>>>> origin/main
       }
 
       this.rowKeyTokenToRow.set(token, row);

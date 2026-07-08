@@ -14,12 +14,9 @@ Reusable TypeScript sorting component library.
 - Client-side pagination helpers with page controls and metadata (`setPagination`, `setPageSize`, `setPageIndex`, `getPageInfo`)
 - Column visibility state helpers (`setColumnVisibility`, `toggleColumnVisibility`, `setColumnVisibilityMap`, `clearColumnVisibility`)
 - Row selection and bulk action helpers (`selectRowByKey`, `selectAllFilteredRows`, `getSelectionInfo`, `executeBulkAction`)
-<<<<<<< HEAD
 - CSV export utility (`exportCsv` with all/filtered/sorted/paginated/selected scopes)
 - Formatter preset helpers (`currencyPacks`, `localePacks`, `timezonePacks`, `createCurrencyPreset`, `createDateFormatterPreset`, `createDateTimeFormatterPreset`, `createTimezonePreset`)
 - Validation helpers for column configs, row keys, delimiter checks, and supported format errors
-=======
->>>>>>> origin/main
 - Action column support: `view`, `edit`, `archive`, `delete` with router hooks and confirmation support
 - Facade API: `myComponent` with aliases (`SortData`, `Sort`, `SortableTable`, `Table`, `myComponet`)
 
@@ -146,7 +143,6 @@ const bulkResult = await table.executeBulkAction((context) => {
 	};
 });
 
-<<<<<<< HEAD
 const csvAll = table.exportCsv();
 const csvVisibleOnly = table.exportCsv({ scope: "sorted", delimiter: ";" });
 const csvSelected = table.exportCsv({ scope: "selected", includeHeaders: false });
@@ -157,8 +153,7 @@ const eurAmountColumn = {
 	...currencyPacks.eur
 };
 
-=======
->>>>>>> origin/main
+
 table.setFilters([
 	{ columnKey: "name", operator: "contains", value: "ali" },
 	{ columnKey: "age", operator: "gte", value: 30 }
@@ -219,7 +214,6 @@ Row selection APIs:
 - `getSelectionInfo()`
 - `executeBulkAction(handler)`
 
-<<<<<<< HEAD
 CSV export API:
 
 - `exportCsv()`
@@ -242,8 +236,7 @@ Validation helpers:
 - `assertValidRowKeyValue(rowKey, value)`
 - `assertSupportedFormat(format, supportedFormats)`
 
-=======
->>>>>>> origin/main
+
 Action column support:
 
 - built-in `view`, `edit`, `archive`, `delete` actions
