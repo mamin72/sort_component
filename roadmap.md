@@ -96,7 +96,7 @@ These are the full target modules for a complete SaaS-ready library.
 ## Phase 4: Production Hardening
 
 1. [x] Add benchmark suite for large datasets.
-2. Add fuzz/property tests for parser and sorting correctness.
+2. [x] Add fuzz/property tests for parser and sorting correctness.
 3. Add compatibility test matrix across Node versions.
 4. Add release automation with changelog and version policy enforcement.
 5. Add migration guide framework for future major versions.
@@ -120,6 +120,7 @@ Work strictly from top to bottom. Do not start the next item until the current i
 13. [x] Add permission-aware action predicates.
 14. [x] Add usage telemetry hooks for component interaction events.
 15. [x] Add benchmark suite for large datasets.
+16. [x] Add fuzz/property tests for parser and sorting correctness.
 
 ## Definition Of Done (for each item)
 
@@ -132,9 +133,9 @@ Work strictly from top to bottom. Do not start the next item until the current i
 
 ## Next Item To Execute
 
-- Item 16: Add fuzz/property tests for parser and sorting correctness.
+- Item 17: Add compatibility test matrix across Node versions.
 - Scope for next implementation:
-- Add deterministic property-based scenarios for sort ordering invariants.
-- Add parser fuzz coverage for malformed JSON/XML/YAML edge cases.
-- Keep runs reproducible and CI-friendly with bounded execution time.
+- Add CI matrix for active Node LTS versions.
+- Ensure `npm run quality:check` runs consistently across matrix jobs.
+- Keep workflow output compact and deterministic for governance checks.
 

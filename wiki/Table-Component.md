@@ -588,3 +588,20 @@ node benchmarks/run-benchmarks.cjs --sizes 2000,10000 --iterations 15 --warmup 3
 
 The harness uses seeded input generation so benchmark datasets are reproducible.
 
+## Property And Fuzz Tests
+
+The repository includes deterministic property and parser fuzz-style tests in `tests/propertyAndFuzz.test.ts`.
+
+Coverage focus:
+
+- sorting invariants (monotonic ordering, idempotency, membership preservation)
+- malformed parser inputs (JSON, JSONL, YAML) and bounded CSV edge-case handling
+
+Run full validation:
+
+```bash
+npm run quality:check
+```
+
+Tests are intentionally deterministic and bounded for CI reliability.
+
