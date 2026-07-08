@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { component, sortUsingComponent } from '../src/index';
+import { allComponentKitNames, component, createEnabledComponent, sortUsingComponent } from '../src/index';
 
 describe('component namespace', () => {
   it('provides auth and billing kit capabilities', () => {
@@ -85,5 +85,40 @@ describe('component namespace', () => {
     expect(component.onboardingAdoptionKit.completionRatio([])).toBe(0);
 
     expect(component.foundationPrimitives.supportedTracks.length).toBe(5);
+  });
+
+  it('enables all kits by default in createEnabledComponent', () => {
+    const runtime = createEnabledComponent();
+
+    expect(runtime.enabledKits.size).toBe(allComponentKitNames.length);
+    for (const kitName of allComponentKitNames) {
+      expect(runtime.isEnabled(kitName)).toBe(true);
+    }
+
+    const auth = runtime.component.authKit.createContext({ tenantId: 't1', userId: 'u1' });
+    expect(auth.userId).toBe('u1');
+  });
+
+  it('allows progressive roadmap enablement and blocks disabled kits', () => {
+    const runtime = createEnabledComponent({
+      enabledKits: ['data-grid-pro', 'foundation-primitives'],
+    });
+
+    expect(runtime.isEnabled('data-grid-pro')).toBe(true);
+    expect(runtime.isEnabled('auth-kit')).toBe(false);
+
+    const table = runtime.component.dataGridPro.createTable({
+      data: [{ id: '1', name: 'Alice' }],
+      columns: [{ key: 'name', header: 'Name', dataType: 'text' }],
+      rowKey: 'id',
+    });
+
+    expect(table.getTableRows()[0]?.cells[0]?.displayValue).toBe('Alice');
+    expect(() => runtime.component.authKit.createContext({ tenantId: 't1', userId: 'u1' })).toThrow(
+      "Kit 'auth-kit' is disabled. Enable it in createEnabledComponent()."
+    );
+    expect(() => runtime.component['billing-kit'].createEntitlementChecker({ features: [] })).toThrow(
+      "Kit 'billing-kit' is disabled. Enable it in createEnabledComponent()."
+    );
   });
 });

@@ -37,6 +37,25 @@ component["data-grid-pro"];
 
 Note: `component.auth-kit` is not valid JavaScript syntax. Use `component.authKit` or bracket access.
 
+Progressive roadmap enablement:
+
+```ts
+import { createEnabledComponent } from "sort_component";
+
+const runtime = createEnabledComponent({
+	enabledKits: ["data-grid-pro", "foundation-primitives"]
+});
+
+runtime.isEnabled("data-grid-pro"); // true
+runtime.isEnabled("auth-kit"); // false
+
+// Enabled
+runtime.component.dataGridPro;
+
+// Disabled kits throw if used until enabled in roadmap progression
+// runtime.component.authKit.createContext(...)
+```
+
 ## Feature Status
 
 ### Available Now

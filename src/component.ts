@@ -38,6 +38,26 @@ export interface InboxItem {
   readonly createdAt: string;
 }
 
+export const allComponentKitNames = [
+  'auth-kit',
+  'billing-kit',
+  'tenant-org-kit',
+  'data-grid-pro',
+  'forms-validation-kit',
+  'workflow-automation-ui',
+  'analytics-dashboard-kit',
+  'notifications-inbox-kit',
+  'admin-ops-console-kit',
+  'onboarding-adoption-kit',
+  'foundation-primitives',
+] as const;
+
+export type ComponentKitName = (typeof allComponentKitNames)[number];
+
+export interface ComponentEnablementOptions {
+  readonly enabledKits?: readonly ComponentKitName[];
+}
+
 export const authKit = {
   createContext(input: {
     tenantId: string;
@@ -163,6 +183,78 @@ export const component = {
 } as const;
 
 export type ComponentNamespace = typeof component;
+
+export interface EnabledComponentNamespace {
+  readonly component: ComponentNamespace;
+  readonly enabledKits: ReadonlySet<ComponentKitName>;
+  isEnabled(kitName: ComponentKitName): boolean;
+}
+
+function createDisabledKitProxy<TKit extends object>(kitName: ComponentKitName): TKit {
+  return new Proxy(
+    {},
+    {
+      get(): never {
+        throw new Error(`Kit '${kitName}' is disabled. Enable it in createEnabledComponent().`);
+      },
+    }
+  ) as TKit;
+}
+
+function normalizeEnabledKits(enabledKits?: readonly ComponentKitName[]): ReadonlySet<ComponentKitName> {
+  if (enabledKits == null) {
+    return new Set(allComponentKitNames);
+  }
+
+  return new Set(enabledKits);
+}
+
+function resolveKit<TKit extends object>(
+  kitName: ComponentKitName,
+  enabled: ReadonlySet<ComponentKitName>,
+  kit: TKit
+): TKit {
+  if (enabled.has(kitName)) {
+    return kit;
+  }
+
+  return createDisabledKitProxy<TKit>(kitName);
+}
+
+export function createEnabledComponent(options: ComponentEnablementOptions = {}): EnabledComponentNamespace {
+  const enabledKits = normalizeEnabledKits(options.enabledKits);
+
+  const enabledComponent: ComponentNamespace = {
+    authKit: resolveKit('auth-kit', enabledKits, authKit),
+    billingKit: resolveKit('billing-kit', enabledKits, billingKit),
+    tenantOrgKit: resolveKit('tenant-org-kit', enabledKits, tenantOrgKit),
+    dataGridPro: resolveKit('data-grid-pro', enabledKits, dataGridPro),
+    formsValidationKit: resolveKit('forms-validation-kit', enabledKits, formsValidationKit),
+    workflowAutomationUi: resolveKit('workflow-automation-ui', enabledKits, workflowAutomationUi),
+    analyticsDashboardKit: resolveKit('analytics-dashboard-kit', enabledKits, analyticsDashboardKit),
+    notificationsInboxKit: resolveKit('notifications-inbox-kit', enabledKits, notificationsInboxKit),
+    adminOpsConsoleKit: resolveKit('admin-ops-console-kit', enabledKits, adminOpsConsoleKit),
+    onboardingAdoptionKit: resolveKit('onboarding-adoption-kit', enabledKits, onboardingAdoptionKit),
+    foundationPrimitives: resolveKit('foundation-primitives', enabledKits, foundationPrimitives),
+    'auth-kit': resolveKit('auth-kit', enabledKits, authKit),
+    'billing-kit': resolveKit('billing-kit', enabledKits, billingKit),
+    'tenant-org-kit': resolveKit('tenant-org-kit', enabledKits, tenantOrgKit),
+    'data-grid-pro': resolveKit('data-grid-pro', enabledKits, dataGridPro),
+    'forms-validation-kit': resolveKit('forms-validation-kit', enabledKits, formsValidationKit),
+    'workflow-automation-ui': resolveKit('workflow-automation-ui', enabledKits, workflowAutomationUi),
+    'analytics-dashboard-kit': resolveKit('analytics-dashboard-kit', enabledKits, analyticsDashboardKit),
+    'notifications-inbox-kit': resolveKit('notifications-inbox-kit', enabledKits, notificationsInboxKit),
+    'admin-ops-console-kit': resolveKit('admin-ops-console-kit', enabledKits, adminOpsConsoleKit),
+    'onboarding-adoption-kit': resolveKit('onboarding-adoption-kit', enabledKits, onboardingAdoptionKit),
+    'foundation-primitives': resolveKit('foundation-primitives', enabledKits, foundationPrimitives),
+  } as const;
+
+  return {
+    component: enabledComponent,
+    enabledKits,
+    isEnabled: (kitName: ComponentKitName): boolean => enabledKits.has(kitName),
+  };
+}
 
 export function sortUsingComponent<TItem>(items: readonly TItem[], rules: readonly SortRule<TItem>[]): readonly TItem[] {
   return component.dataGridPro.sortByRules(items, rules);
