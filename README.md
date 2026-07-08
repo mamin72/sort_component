@@ -588,6 +588,21 @@ node benchmarks/run-benchmarks.cjs --sizes 2000,10000 --iterations 15 --warmup 3
 
 The harness is deterministic: generated data uses fixed seeds to keep runs reproducible across environments.
 
+## Property And Fuzz Tests
+
+The test suite includes deterministic property and fuzz-style coverage for:
+
+- sort correctness invariants (monotonic ordering, idempotency, membership preservation)
+- parser resilience for malformed JSON, JSONL, YAML, and CSV edge payloads
+
+Run all quality gates (including property/fuzz tests):
+
+```bash
+npm run quality:check
+```
+
+Property/fuzz tests are deterministic and bounded to remain CI-friendly.
+
 ## Wiki
 
 The project includes versioned wiki content in the `wiki/` folder:
