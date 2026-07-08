@@ -72,6 +72,7 @@ runtime.component.dataGridPro;
 - Formatter preset helpers (`currencyPacks`, `localePacks`, `timezonePacks`, `createCurrencyPreset`, `createDateFormatterPreset`, `createDateTimeFormatterPreset`, `createTimezonePreset`)
 - Validation helpers for column configs, row keys, delimiter checks, and supported format errors
 - Foundation token schema helpers for semantic aliases and naming conventions (`createTokenSchema`, `resolveTokenName`, `getTokenValue`, `validateTokenName`)
+- Baseline foundation theme packs with parity checks (`baselineThemePacks`, `createBaselineThemePacks`, `assertThemePacksShareTokenCoverage`, `assertThemePacksShareAliasCoverage`)
 - Starter templates for table and parse+sort setup (`createTableStarterTemplate`, `createParseAndSortStarterTemplate`, `parseAndSortWithStarterTemplate`)
 - Schema-driven column builder utilities (`createColumnSchemaBuilder`, `defineTableColumns`)
 - Strong TypeScript row/column inference helpers (`createTypedTableOptions`, `createTypedTableComponent`)
@@ -130,6 +131,18 @@ const tokenSchema = createTokenSchema({
 
 const resolved = resolveTokenName(tokenSchema, "color.action.primary.background");
 const value = getTokenValue(tokenSchema, "color.page.background");
+```
+
+## Baseline Theme Packs
+
+Use built-in baseline packs to bootstrap consistent theming across light, dark, and high-contrast modes.
+
+```ts
+import { baselineThemePacks, getTokenValue } from "saas-ui-accelerator";
+
+const lightSurface = getTokenValue(baselineThemePacks.light.schema, "color.page.background");
+const darkPrimary = getTokenValue(baselineThemePacks.dark.schema, "color.brand.primary");
+const highContrastFocus = getTokenValue(baselineThemePacks["high-contrast"].schema, "color.focus.ring");
 ```
 
 ## Data Format Contract

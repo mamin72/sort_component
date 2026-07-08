@@ -7,6 +7,7 @@ export * from './serverModeAdapters';
 export * from './starterTemplates';
 export * from './validation';
 export * from './tokenSchema';
+export * from './themePacks';
 export * from './tableComponent';
 export * from './component';
 export * from './myComponent';
