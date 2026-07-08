@@ -15,6 +15,7 @@ permissions:
 
 jobs:
   detect-default-setup:
+    if: vars.CODEQL_ADVANCED_WORKFLOW == 'true'
     name: Detect CodeQL mode
     runs-on: ubuntu-latest
     permissions:
@@ -47,7 +48,7 @@ jobs:
 
   analyze:
     needs: detect-default-setup
-    if: needs.detect-default-setup.outputs.default_setup_enabled != 'true'
+    if: vars.CODEQL_ADVANCED_WORKFLOW == 'true' && needs.detect-default-setup.outputs.default_setup_enabled != 'true'
     name: Analyze (${{ matrix.language }})
     runs-on: ubuntu-latest
     strategy:
@@ -73,10 +74,19 @@ jobs:
 
   skip-advanced-when-default-setup:
     needs: detect-default-setup
-    if: needs.detect-default-setup.outputs.default_setup_enabled == 'true'
+    if: vars.CODEQL_ADVANCED_WORKFLOW == 'true' && needs.detect-default-setup.outputs.default_setup_enabled == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Explain skip reason
         run: |
           echo "Skipping advanced CodeQL workflow because default setup is enabled (state=${{ needs.detect-default-setup.outputs.default_setup_state }})."
           echo "To run this advanced workflow, disable default setup in repository Code Security settings."
+
+  skip-advanced-by-default:
+    if: vars.CODEQL_ADVANCED_WORKFLOW != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Explain skip reason
+        run: |
+          echo "Skipping advanced CodeQL workflow by default."
+          echo "Set repository variable CODEQL_ADVANCED_WORKFLOW=true to enable this workflow."
