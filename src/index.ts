@@ -14,6 +14,7 @@ export * from './errorResilienceContracts';
 export * from './retryWrappers';
 export * from './loadingStatePrimitives';
 export * from './optimisticRecoveryHelpers';
+export * from './i18nMessageContracts';
 export * from './tokenSchema';
 export * from './themePacks';
 export * from './queryContracts';
