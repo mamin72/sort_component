@@ -555,7 +555,38 @@ npm run test:coverage
 npm run lint
 npm run typecheck
 npm run quality:check
+npm run benchmark
+npm run benchmark:quick
 ```
+
+## Benchmark Suite
+
+The benchmark harness measures large-dataset performance for table operations:
+
+- sorting
+- filtering
+- pagination
+- selection
+
+Run the default benchmark profile:
+
+```bash
+npm run benchmark
+```
+
+Run a faster CI-friendly profile:
+
+```bash
+npm run benchmark:quick
+```
+
+Run with custom dataset sizes, iterations, and JSON output:
+
+```bash
+node benchmarks/run-benchmarks.cjs --sizes 2000,10000 --iterations 15 --warmup 3 --out benchmark-results.json
+```
+
+The harness is deterministic: generated data uses fixed seeds to keep runs reproducible across environments.
 
 ## Wiki
 

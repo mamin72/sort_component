@@ -95,7 +95,7 @@ These are the full target modules for a complete SaaS-ready library.
 
 ## Phase 4: Production Hardening
 
-1. Add benchmark suite for large datasets.
+1. [x] Add benchmark suite for large datasets.
 2. Add fuzz/property tests for parser and sorting correctness.
 3. Add compatibility test matrix across Node versions.
 4. Add release automation with changelog and version policy enforcement.
@@ -119,6 +119,7 @@ Work strictly from top to bottom. Do not start the next item until the current i
 12. [x] Add audit metadata hooks for row actions.
 13. [x] Add permission-aware action predicates.
 14. [x] Add usage telemetry hooks for component interaction events.
+15. [x] Add benchmark suite for large datasets.
 
 ## Definition Of Done (for each item)
 
@@ -131,9 +132,9 @@ Work strictly from top to bottom. Do not start the next item until the current i
 
 ## Next Item To Execute
 
-- Item 15: Add benchmark suite for large datasets.
+- Item 16: Add fuzz/property tests for parser and sorting correctness.
 - Scope for next implementation:
-- Add benchmark harness for sorting, filtering, pagination, and selection operations.
-- Capture timing and throughput metrics for realistic data volumes.
-- Keep benchmark tooling deterministic and CI-friendly.
+- Add deterministic property-based scenarios for sort ordering invariants.
+- Add parser fuzz coverage for malformed JSON/XML/YAML edge cases.
+- Keep runs reproducible and CI-friendly with bounded execution time.
 
