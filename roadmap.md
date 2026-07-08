@@ -97,7 +97,7 @@ These are the full target modules for a complete SaaS-ready library.
 
 1. [x] Add benchmark suite for large datasets.
 2. [x] Add fuzz/property tests for parser and sorting correctness.
-3. Add compatibility test matrix across Node versions.
+3. [x] Add compatibility test matrix across Node versions.
 4. Add release automation with changelog and version policy enforcement.
 5. Add migration guide framework for future major versions.
 
@@ -121,6 +121,7 @@ Work strictly from top to bottom. Do not start the next item until the current i
 14. [x] Add usage telemetry hooks for component interaction events.
 15. [x] Add benchmark suite for large datasets.
 16. [x] Add fuzz/property tests for parser and sorting correctness.
+17. [x] Add compatibility test matrix across Node versions.
 
 ## Definition Of Done (for each item)
 
@@ -133,9 +134,9 @@ Work strictly from top to bottom. Do not start the next item until the current i
 
 ## Next Item To Execute
 
-- Item 17: Add compatibility test matrix across Node versions.
+- Item 18: Add release automation with changelog and version policy enforcement.
 - Scope for next implementation:
-- Add CI matrix for active Node LTS versions.
-- Ensure `npm run quality:check` runs consistently across matrix jobs.
-- Keep workflow output compact and deterministic for governance checks.
+- Add release workflow with version bump safeguards.
+- Enforce changelog updates on release PRs.
+- Add policy checks for versioning consistency and release notes completeness.
 

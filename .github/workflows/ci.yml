@@ -67,6 +67,11 @@ jobs:
 
   quality-check:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [20, 22]
+    name: quality-check (node ${{ matrix.node-version }})
 
     steps:
       - name: Checkout
@@ -75,7 +80,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ matrix.node-version }}
           cache: npm
 
       - name: Install dependencies

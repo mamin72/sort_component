@@ -605,3 +605,12 @@ npm run quality:check
 
 Tests are intentionally deterministic and bounded for CI reliability.
 
+## Node Compatibility Matrix
+
+CI runs `npm run quality:check` across active Node LTS versions:
+
+- Node 20
+- Node 22
+
+This ensures compatibility and consistent behavior across supported Node runtimes.
+

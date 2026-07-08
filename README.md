@@ -603,6 +603,15 @@ npm run quality:check
 
 Property/fuzz tests are deterministic and bounded to remain CI-friendly.
 
+## Node Compatibility Matrix
+
+CI executes `npm run quality:check` across active Node LTS versions:
+
+- Node 20
+- Node 22
+
+This compatibility matrix helps ensure deterministic behavior and consistent quality gates across supported runtimes.
+
 ## Wiki
 
 The project includes versioned wiki content in the `wiki/` folder:
