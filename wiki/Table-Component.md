@@ -250,6 +250,46 @@ Adapter APIs:
 - `toServerPaginationRequest(pagination)`
 - `createServerTableRequest({ sortRules, filters, pagination })`
 
+## Schema-Driven Column Builder
+
+Build typed table columns from row schemas and keep row/column contracts strongly inferred.
+
+```ts
+import {
+  createColumnSchemaBuilder,
+  createTypedTableComponent,
+  defineTableColumns
+} from 'sort_component';
+
+type UserRow = {
+  id: string;
+  fullName: string;
+  age: number;
+  active: boolean;
+};
+
+const schema = createColumnSchemaBuilder<UserRow>();
+
+const columns = defineTableColumns(
+  schema.text('fullName', 'Full Name', { sortable: true }),
+  schema.number('age', 'Age', { sortable: true }),
+  schema.boolean('active', 'Active')
+);
+
+const table = createTypedTableComponent({
+  data: [{ id: 'u1', fullName: 'Alice', age: 31, active: true }],
+  columns,
+  rowKey: 'id'
+});
+```
+
+Helper APIs:
+
+- `createColumnSchemaBuilder<Row>()`
+- `defineTableColumns(...columns)`
+- `createTypedTableOptions({ data, columns, ... })`
+- `createTypedTableComponent({ data, columns, ... })`
+
 ## Action Audit Hooks
 
 Action columns support transport-agnostic audit metadata hooks around action execution.
