@@ -70,17 +70,17 @@ These are the full target modules for a complete SaaS-ready library.
 
 ## Phase 1: Data Grid Essentials
 
-1. Add filtering engine (text, number, date, boolean, enum operators).
-2. Add multi-column sorting support in table API.
-3. Add pagination helpers (client-side first).
-4. Add column visibility controls.
-5. Add row selection and bulk action state helpers.
+1. [x] Add filtering engine (text, number, date, boolean, enum operators).
+2. [x] Add multi-column sorting support in table API.
+3. [x] Add pagination helpers (client-side first).
+4. [x] Add column visibility controls.
+5. [x] Add row selection and bulk action state helpers.
 6. [x] CSV export utility.
 
 ## Phase 2: Developer Experience
 
-1. Add schema-driven column builder utilities.
-2. Add stronger TypeScript inference for row and column contracts.
+1. [x] Add schema-driven column builder utilities.
+2. [x] Add stronger TypeScript inference for row and column contracts.
 3. [x] Add preset formatters (currency packs, locale packs, timezone helpers).
 4. [x] Add better error messages and validation utilities.
 5. [x] Add starter templates and copy-paste examples.

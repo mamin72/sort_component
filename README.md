@@ -72,6 +72,8 @@ runtime.component.dataGridPro;
 - Formatter preset helpers (`currencyPacks`, `localePacks`, `timezonePacks`, `createCurrencyPreset`, `createDateFormatterPreset`, `createDateTimeFormatterPreset`, `createTimezonePreset`)
 - Validation helpers for column configs, row keys, delimiter checks, and supported format errors
 - Starter templates for table and parse+sort setup (`createTableStarterTemplate`, `createParseAndSortStarterTemplate`, `parseAndSortWithStarterTemplate`)
+- Schema-driven column builder utilities (`createColumnSchemaBuilder`, `defineTableColumns`)
+- Strong TypeScript row/column inference helpers (`createTypedTableOptions`, `createTypedTableComponent`)
 - Saved views model for table state round-trip (`createSavedView`, `applySavedView`, `saveView`, `loadView`, `listSavedViews`)
 - Server-side mode adapters for API-ready request models (`toServerSortRules`, `toServerFilterRules`, `toServerPaginationRequest`, `createServerTableRequest`)
 - Action audit metadata hooks for row actions (`onAudit` with structured lifecycle events)
@@ -345,6 +347,44 @@ Starter templates:
 - `createTableStarterTemplate(options)`
 - `createParseAndSortStarterTemplate(options)`
 - `parseAndSortWithStarterTemplate(input, options)`
+
+Schema-driven column builder and inference helpers:
+
+- `createColumnSchemaBuilder<Row>()`
+- `defineTableColumns(...columns)`
+- `createTypedTableOptions({ data, columns, ... })`
+- `createTypedTableComponent({ data, columns, ... })`
+
+Schema-driven builder example:
+
+```ts
+import {
+	createColumnSchemaBuilder,
+	createTypedTableComponent,
+	defineTableColumns
+} from "sort_component";
+
+type UserRow = {
+	id: string;
+	fullName: string;
+	age: number;
+	active: boolean;
+};
+
+const schema = createColumnSchemaBuilder<UserRow>();
+
+const columns = defineTableColumns(
+	schema.text("fullName", "Full Name", { sortable: true }),
+	schema.number("age", "Age", { sortable: true }),
+	schema.boolean("active", "Active")
+);
+
+const table = createTypedTableComponent({
+	data: [{ id: "u1", fullName: "Alice", age: 31, active: true }],
+	columns,
+	rowKey: "id"
+});
+```
 
 Starter template example:
 
