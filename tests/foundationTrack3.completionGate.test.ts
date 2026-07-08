@@ -25,8 +25,10 @@ describe('foundation track 3 completion gate', () => {
     expect(typeof foundation.evaluateTenantScope).toBe('function');
     expect(typeof foundation.createTenantScopedComponentAccessPolicy).toBe('function');
     expect(typeof foundation.evaluateTenantScopedComponentAccess).toBe('function');
+    expect(typeof foundation.createTenantScopedComponentAccessEvaluator).toBe('function');
     expect(typeof foundation.createTenantScopedActionAccessPolicy).toBe('function');
     expect(typeof foundation.evaluateTenantScopedActionAccess).toBe('function');
+    expect(typeof foundation.createTenantScopedActionAccessEvaluator).toBe('function');
     expect(typeof foundation.createTenantScopedFieldAccessPolicy).toBe('function');
     expect(typeof foundation.evaluateTenantScopedFieldAccess).toBe('function');
     expect(typeof foundation.combinePolicyEvaluationDecisions).toBe('function');
@@ -150,5 +152,28 @@ describe('foundation track 3 completion gate', () => {
 
     expect(combinedDecision.allowed).toBe(true);
     expect(combinedDecision.decision).toBe('allow');
+
+    const tenantComponentEvaluator = foundation.createTenantScopedComponentAccessEvaluator([tenantComponentPolicy]);
+    const tenantActionEvaluator = foundation.createTenantScopedActionAccessEvaluator([tenantActionPolicy]);
+
+    expect(tenantComponentEvaluator.evaluate('users-table', principal).allowed).toBe(true);
+    expect(tenantActionEvaluator.evaluate('users-table', 'archive', principal).allowed).toBe(true);
+
+    const principalFromOtherTenant: foundation.PageAccessPrincipal = {
+      ...principal,
+      tenantId: 'tenant-b',
+    };
+
+    const deniedDecision = foundation.combinePolicyEvaluationDecisions([
+      foundation.evaluateTenantScopedComponentAccess(tenantComponentPolicy, principalFromOtherTenant),
+      foundation.evaluateTenantScopedActionAccess(tenantActionPolicy, principalFromOtherTenant),
+    ]);
+
+    expect(deniedDecision.allowed).toBe(false);
+    expect(deniedDecision.decision).toBe('deny');
+    expect(deniedDecision.reasons.map((reason) => reason.code)).toEqual([
+      'tenant-mismatch',
+      'tenant-mismatch',
+    ]);
   });
 });
