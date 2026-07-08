@@ -209,7 +209,7 @@ Work strictly from top to bottom. Do not start the next item until the current i
 28. [x] Phase 5/Foundation Track 2 chunk 3: add offline-aware state sync and queueing patterns.
 29. [x] Phase 5/Foundation Track 2 chunk 4: add mutation lifecycle state primitives and events.
 30. [x] Phase 5/Foundation Track 2 chunk 5: add tests, docs, and examples for data/state primitives.
-31. [ ] Phase 5/Foundation Track 2 completion gate: all chunk outputs integrated and validated.
+31. [x] Phase 5/Foundation Track 2 completion gate: all chunk outputs integrated and validated.
 32. [ ] Phase 5/Foundation Track 3 chunk 1: define page-level access control contracts.
 33. [ ] Phase 5/Foundation Track 3 chunk 2: define component and action-level policy primitives.
 34. [ ] Phase 5/Foundation Track 3 chunk 3: implement field-level guard utilities with typed conditions.
@@ -325,8 +325,8 @@ Work strictly from top to bottom. Do not start the next item until the current i
 
 ## Next Item To Execute
 
-- Item 31: Phase 5/Foundation Track 2 completion gate - all chunk outputs integrated and validated.
+- Item 32: Phase 5/Foundation Track 3 chunk 1 - define page-level access control contracts.
 - Scope for next implementation:
-- Add Foundation Track 2 completion gate tests covering integrated query/mutation workflows.
-- Validate README and roadmap consistency for shipped Track 2 capabilities.
-- Confirm full quality gate and release-readiness evidence for Track 2 handoff.
+- Define typed page access contract inputs and evaluation results.
+- Add helpers for evaluating allow/deny access outcomes with reason metadata.
+- Add tests and README usage examples for page-level access checks.
