@@ -562,3 +562,29 @@ Compatibility aliases:
 - `myComponent.Table` (same as `SortableTable`)
 - `myComponet` (typo-compatible alias)
 
+## Benchmark Suite
+
+The repository includes a deterministic benchmark harness for large datasets in `benchmarks/run-benchmarks.cjs`.
+
+Operations measured:
+
+- sorting
+- filtering
+- pagination
+- selection
+
+Run benchmark profiles:
+
+```bash
+npm run benchmark
+npm run benchmark:quick
+```
+
+Custom benchmark invocation with JSON output:
+
+```bash
+node benchmarks/run-benchmarks.cjs --sizes 2000,10000 --iterations 15 --warmup 3 --out benchmark-results.json
+```
+
+The harness uses seeded input generation so benchmark datasets are reproducible.
+

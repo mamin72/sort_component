@@ -17,7 +17,9 @@
     "lint": "eslint src tests vitest.config.ts --ext .ts --max-warnings 0",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "quality:check": "npm run typecheck && npm run lint && npm run test:coverage"
+    "quality:check": "npm run typecheck && npm run lint && npm run test:coverage",
+    "benchmark": "npm run build && node benchmarks/run-benchmarks.cjs",
+    "benchmark:quick": "npm run build && node benchmarks/run-benchmarks.cjs --sizes 1000,5000 --iterations 10 --warmup 2"
   },
   "keywords": [
     "sorting",
