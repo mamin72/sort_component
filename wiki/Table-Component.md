@@ -178,6 +178,7 @@ Selection helpers:
 - read helpers: `getSelectedRows`, `getSelectedFilteredRows`, `getSelectedPaginatedRows`, `getSelectionInfo`
 - clear helpers: `setSelectedRowKeys`, `clearSelection`
 
+<<<<<<< HEAD
 ## CSV Export
 
 Export the table state to CSV text with configurable scope and formatting.
@@ -247,6 +248,8 @@ Helpers:
 - `assertValidRowKeyValue(rowKey, value)`
 - `assertSupportedFormat(format, supportedFormats)`
 
+=======
+>>>>>>> origin/main
 ## Supported Column Data Types
 
 - `text`
