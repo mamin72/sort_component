@@ -225,3 +225,45 @@ fieldIsFalse(field)
 ```
 
 Typed helper constructors for composing field-level access conditions.
+
+## createTenantScope
+
+```ts
+createTenantScope(input?: {
+  allowedTenants?: readonly string[];
+  denyWhenTenantMissing?: boolean;
+}): TenantScope
+```
+
+Creates a normalized tenant scope model used by tenant-aware policy wrappers.
+
+## evaluateTenantScope
+
+```ts
+evaluateTenantScope(scope: TenantScope, tenantId?: string): TenantScopeResult
+```
+
+Evaluates tenant constraints and returns allow/deny reasons for tenant missing or mismatch states.
+
+## Tenant-Scoped Policy Builders and Evaluators
+
+```ts
+createTenantScopedComponentAccessPolicy(...)
+createTenantScopedActionAccessPolicy(...)
+createTenantScopedFieldAccessPolicy(...)
+evaluateTenantScopedComponentAccess(...)
+evaluateTenantScopedActionAccess(...)
+evaluateTenantScopedFieldAccess(...)
+createTenantScopedComponentAccessEvaluator(...)
+createTenantScopedActionAccessEvaluator(...)
+```
+
+Tenant-scoped wrappers that combine existing access-control checks with tenant constraints.
+
+## combinePolicyEvaluationDecisions
+
+```ts
+combinePolicyEvaluationDecisions(results: readonly Array<{ allowed: boolean; reasons: readonly PolicyEvaluationReason[] }>): PolicyEvaluationDecision
+```
+
+Combines multiple policy evaluation results into a single allow/deny decision with merged reasons.
